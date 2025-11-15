@@ -19,7 +19,7 @@ namespace ExpandWorkspace
     {
         public bool IsHideLoop = false;
         [DllImport("user32.dll")]
-        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        private static extern IntPtr FindWindow(string lpClassName, string? lpWindowName);
 
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -98,8 +98,9 @@ namespace ExpandWorkspace
                 return r.Left == Left && r.Top == Top && r.Right == Right && r.Bottom == Bottom;
             }
 
-            public override bool Equals(object obj)
+            public override bool Equals(object? obj)
             {
+                if(obj == null) return false;
                 if (obj is RECT)
                     return Equals((RECT)obj);
                 else if (obj is System.Drawing.Rectangle)
